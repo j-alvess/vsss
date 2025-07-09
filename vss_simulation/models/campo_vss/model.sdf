@@ -122,24 +122,79 @@
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
       </collision>
 
-      <visual name="goal_west_visual">
-        <pose>-0.8 0 0.05 0 0 0</pose>
-        <geometry><box><size>0.1 0.4 0.1</size></box></geometry>
-        <material><script><name>Gazebo/Yellow</name></script></material>
+      <visual name="goal_west_floor_visual">
+        <pose>-0.8 0 0 0 0 0</pose>
+        <geometry><box><size>0.1 0.4 0.01</size></box></geometry>
+        <material><script><name>Gazebo/Red</name></script></material>
       </visual>
-      <collision name="goal_west_collision">
-        <pose>-0.8 0 0.05 0 0 0</pose>
-        <geometry><box><size>0.1 0.4 0.1</size></box></geometry>
+      <collision name="goal_west_floor_collision">
+        <pose>-0.8 0 0 0 0 0</pose>
+        <geometry><box><size>0.1 0.4 0.01</size></box></geometry>
       </collision>
-
-      <visual name="goal_east_visual">
-        <pose>0.8 0 0.05 0 0 0</pose>
-        <geometry><box><size>0.1 0.4 0.1</size></box></geometry>
-        <material><script><name>Gazebo/Yellow</name></script></material>
+      <visual name="goal_west_wall_01_visual">
+        <pose>-0.86 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.02 0.4 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Red</name></script></material>
       </visual>
-      <collision name="goal_east_collision">
-        <pose>0.8 0 0.05 0 0 0</pose>
-        <geometry><box><size>0.1 0.4 0.1</size></box></geometry>
+      <collision name="goal_west_wall_01_collision">
+        <pose>-0.86 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.4 0.02 0.1</size></box></geometry>
+      </collision>
+      <visual name="goal_west_wall_02_visual">
+        <pose>-0.81 0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Red</name></script></material>
+      </visual>
+      <collision name="goal_west_wall_02_collision">
+        <pose>-0.81 0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+      </collision>
+      <visual name="goal_west_wall_03_visual">
+        <pose>-0.81 -0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Red</name></script></material>
+      </visual>
+      <collision name="goal_west_wall_03_collision">
+        <pose>-0.81 -0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+      </collision>
+      
+
+      <visual name="goal_east_floor_visual">
+        <pose>0.8 0 0 0 0 0</pose>
+        <geometry><box><size>0.1 0.4 0.01</size></box></geometry>
+        <material><script><name>Gazebo/Blue</name></script></material>
+      </visual>
+      <collision name="goal_east_floor_collision">
+        <pose>0.8 0 0 0 0 0</pose>
+        <geometry><box><size>0.1 0.4 0.01</size></box></geometry>
+      </collision>
+      <visual name="goal_east_wall_01_visual">
+        <pose>0.86 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.02 0.4 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Blue</name></script></material>
+      </visual>
+      <collision name="goal_east_wall_01_collision">
+        <pose>0.86 0 0.05 0 0 0</pose>
+        <geometry><box><size>0.4 0.02 0.1</size></box></geometry>
+      </collision>
+      <visual name="goal_east_wall_02_visual">
+        <pose>0.81 0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Blue</name></script></material>
+      </visual>
+      <collision name="goal_east_wall_02_collision">
+        <pose>0.81 0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+      </collision>
+      <visual name="goal_east_wall_03_visual">
+        <pose>0.81 -0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
+        <material><script><name>Gazebo/Blue</name></script></material>
+      </visual>
+      <collision name="goal_east_wall_03_collision">
+        <pose>0.81 -0.21 0.05 0 0 1.57</pose>
+        <geometry><box><size>0.02 0.1 0.1</size></box></geometry>
       </collision>
 
       <visual name="line_center_visual">
