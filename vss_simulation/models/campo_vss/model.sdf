@@ -22,6 +22,7 @@
         </geometry>
       </collision>
 
+      <!-- Parede Norte -->
       <visual name="wall_north_visual">
         <pose>0 0.65 0.05 0 0 0</pose>
         <geometry><box><size>1.5 0.02 0.1</size></box></geometry>
@@ -32,6 +33,7 @@
         <geometry><box><size>1.5 0.02 0.1</size></box></geometry>
       </collision>
 
+      <!-- Parede Sul -->
       <visual name="wall_south_visual">
         <pose>0 -0.65 0.05 0 0 0</pose>
         <geometry><box><size>1.5 0.02 0.1</size></box></geometry>
@@ -42,6 +44,7 @@
         <geometry><box><size>1.5 0.02 0.1</size></box></geometry>
       </collision>
       
+      <!-- Parede Oeste/Norte -->
       <visual name="wall_west_north_visual">
         <pose>-0.75 0.425 0.05 0 0 0</pose>
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
@@ -52,6 +55,7 @@
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
       </collision>
 
+      <!-- Escanteio Oeste/Norte-->
       <visual name="wall_west_north_corner_visual">
         <pose>-0.715 0.615 0.05 0 0 0.785</pose>
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
@@ -62,6 +66,7 @@
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
       </collision>
       
+      <!-- Parede Oeste/Sul -->
       <visual name="wall_west_south_visual">
         <pose>-0.75 -0.425 0.05 0 0 0</pose>
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
@@ -72,6 +77,7 @@
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
       </collision>
       
+      <!-- Escanteio Oeste/Sul -->
       <visual name="wall_west_south_corner_visual">
         <pose>-0.715 -0.615 0.05 0 0 -0.785</pose>
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
@@ -82,6 +88,7 @@
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
       </collision>
       
+      <!-- Parede Leste/Norte -->
       <visual name="wall_east_north_visual">
         <pose>0.75 0.425 0.05 0 0 0</pose>
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
@@ -92,6 +99,7 @@
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>
       </collision>
 
+      <!-- Escantei Leste/Norte -->
       <visual name="wall_east_north_corner_visual">
         <pose>0.715 0.615 0.05 0 0 -0.785</pose>
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
@@ -102,6 +110,7 @@
         <geometry><box><size>0.0989 0.02 0.1</size></box></geometry>
       </collision>
       
+      <!-- -->
       <visual name="wall_east_south_visual">
         <pose>0.75 -0.425 0.05 0 0 0</pose>
         <geometry><box><size>0.02 0.45 0.1</size></box></geometry>

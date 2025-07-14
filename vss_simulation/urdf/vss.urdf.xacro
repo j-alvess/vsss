@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find vss_simulation)/urdf/common_properties.urdf.xacro" />
+  <xacro:include filename="$(find vss_simulation)/urdf/inertias.urdf.xacro" />
+
+  <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z">
+    <link name="base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size_x} ${size_y} ${size_z}"/>
+        </geometry>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size_x} ${size_y} ${size_z}"/>
+        </geometry>
+      </collision>
+
+      <xacro:cuboid_inertia_macro mass="${mass}" width="${size_y}" length="${size_x}" height="${size_z}"/>
+      
+      <gazebo>
+        <material>Gazebo/Blue</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+      </gazebo>
+    </link>
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="vss_robot_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 1) Definição dos parâmetros via property -->
+  <xacro:property name="base_mass"    value="2.0"/>
+  <xacro:property name="base_size_x"  value="0.075"/>
+  <xacro:property name="base_size_y"  value="0.075"/>
+  <xacro:property name="base_size_z"  value="0.075"/>
+
+  <!-- 3) Inclui definição da sua macro de montagem -->
+  <xacro:include filename="$(find vss_simulation)/urdf/vss.urdf.xacro"/>
+
+  <!-- 4) Invoca a macro com os valores acima -->
+  <xacro:vss_base_macro
+    mass="${base_mass}"
+    size_x="${base_size_x}"
+    size_y="${base_size_y}"
+    size_z="${base_size_z}"
+  />
+
+</robot>
