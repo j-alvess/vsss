@@ -6,6 +6,10 @@
   <xacro:property name="base_size_x"  value="0.075"/>
   <xacro:property name="base_size_y"  value="0.075"/>
   <xacro:property name="base_size_z"  value="0.075"/>
+  <xacro:property name="wheel_mass"  value="0.1"/>
+  <xacro:property name="wheel_width"  value="0.01"/>
+  <xacro:property name="wheel_radius" value="0.02"/>
+  <xacro:property name="wheel_center_height"  value="0.01"/>  <!-- value="0" é a parte de baixo da base -->
 
   <!-- 3) Inclui definição da sua macro de montagem -->
   <xacro:include filename="$(find vss_simulation)/urdf/vss.urdf.xacro"/>
@@ -16,6 +20,10 @@
     size_x="${base_size_x}"
     size_y="${base_size_y}"
     size_z="${base_size_z}"
+    wheel_mass="${wheel_mass}"
+    wheel_width="${wheel_width}"
+    wheel_radius="${wheel_radius}"
+    wheel_center_height="${wheel_center_height}"
   />
 
 </robot>
