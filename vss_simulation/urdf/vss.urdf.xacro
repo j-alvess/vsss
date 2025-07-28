@@ -4,7 +4,39 @@
   <xacro:include filename="$(find vss_simulation)/urdf/common_properties.urdf.xacro" />
   <xacro:include filename="$(find vss_simulation)/urdf/inertias.urdf.xacro" />
 
-  <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z">
+  <xacro:macro name="vss_wheel_macro" params="base_size_x dir reflect mass width radius absolute_center_height">
+  <link name="wheel${dir}_link">
+      <visual>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${width}"/>
+        </geometry>
+      </visual>
+      
+      <collision>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${width}"/>
+        </geometry>
+      </collision>
+
+      <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
+      
+      <gazebo>
+        <material>Gazebo/Blue</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+      </gazebo>
+    </link>
+     <joint name="base_to_wheel${dir}" type="continuous">
+        <parent link="base_link"/>
+        <child link="wheel${dir}_link"/>
+        <axis xyz="1 0 0"/>
+        <origin xyz="${reflect*(base_size_x/2)} 0 ${absolute_center_height}" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z wheel_mass wheel_width wheel_radius wheel_center_height">
     <link name="base_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -28,6 +60,24 @@
         <mu2>0.2</mu2>
       </gazebo>
     </link>
-  </xacro:macro>
 
+    <xacro:vss_wheel_macro
+      base_size_x="${base_size_x}"
+      dir = "R"
+      reflect = "1"
+      mass="${wheel_mass}"
+      width="${wheel_width}"
+      radius="${wheel_radius}"
+      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+    />
+    <xacro:vss_wheel_macro
+      base_size_x="${base_size_x}"
+      dir = "L"
+      reflect = "-1"
+      mass="${wheel_mass}"
+      width="${wheel_width}"
+      radius="${wheel_radius}"
+      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+    />
+  </xacro:macro>
 </robot>
