@@ -40,17 +40,17 @@
   <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z wheel_mass wheel_width wheel_radius wheel_center_height">
     <link name="base_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 ${wheel_radius-wheel_center_height+size_z/2}" rpy="0 0 0"/>
         <geometry>
-          <box size="${size_x} ${size_y} ${size_z}"/>
+          <box size="${size_y} ${size_x} ${size_z}"/>
         </geometry>
         <material name="blue"/>
       </visual>
-      
+
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="${size_x} ${size_y} ${size_z}"/>
+          <box size="${size_y} ${size_x} ${size_z}"/>
         </geometry>
       </collision>
 
@@ -70,7 +70,7 @@
       mass="${wheel_mass}"
       width="${wheel_width}"
       radius="${wheel_radius}"
-      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+      absolute_center_height="${wheel_radius}"
     />
     <xacro:vss_wheel_macro
       base_size_x="${base_size_x}"
@@ -79,7 +79,7 @@
       mass="${wheel_mass}"
       width="${wheel_width}"
       radius="${wheel_radius}"
-      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+      absolute_center_height="${wheel_radius}"
     />
   </xacro:macro>
 </robot>
