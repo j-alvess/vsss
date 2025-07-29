@@ -11,6 +11,7 @@
         <geometry>
           <cylinder radius="${radius}" length="${width}"/>
         </geometry>
+        <material name="black"/>
       </visual>
       
       <collision>
@@ -23,7 +24,7 @@
       <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
       
       <gazebo>
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
       </gazebo>
@@ -43,6 +44,7 @@
         <geometry>
           <box size="${size_x} ${size_y} ${size_z}"/>
         </geometry>
+        <material name="blue"/>
       </visual>
       
       <collision>
