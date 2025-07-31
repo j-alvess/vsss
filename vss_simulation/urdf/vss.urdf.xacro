@@ -11,6 +11,7 @@
         <geometry>
           <cylinder radius="${radius}" length="${width}"/>
         </geometry>
+        <material name="black"/>
       </visual>
       
       <collision>
@@ -23,7 +24,7 @@
       <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
       
       <gazebo>
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
       </gazebo>
@@ -31,7 +32,7 @@
      <joint name="base_to_wheel${dir}" type="continuous">
         <parent link="base_link"/>
         <child link="wheel${dir}_link"/>
-        <axis xyz="1 0 0"/>
+        <axis xyz="-1 0 0"/>
         <origin xyz="${reflect*(base_size_x/2)} 0 ${absolute_center_height}" />
     </joint>
   </xacro:macro>
@@ -39,12 +40,13 @@
   <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z wheel_mass wheel_width wheel_radius wheel_center_height">
     <link name="base_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 ${wheel_radius-wheel_center_height+size_z/2}" rpy="0 0 0"/>
         <geometry>
           <box size="${size_x} ${size_y} ${size_z}"/>
         </geometry>
+        <material name="blue"/>
       </visual>
-      
+
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -68,7 +70,7 @@
       mass="${wheel_mass}"
       width="${wheel_width}"
       radius="${wheel_radius}"
-      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+      absolute_center_height="${wheel_radius}"
     />
     <xacro:vss_wheel_macro
       base_size_x="${base_size_x}"
@@ -77,7 +79,7 @@
       mass="${wheel_mass}"
       width="${wheel_width}"
       radius="${wheel_radius}"
-      absolute_center_height="${wheel_center_height-(base_size_y/2)}"
+      absolute_center_height="${wheel_radius}"
     />
   </xacro:macro>
 </robot>
