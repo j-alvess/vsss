@@ -72,7 +72,7 @@
     </link>
 
     <xacro:vss_wheel_macro
-      base_size_x="${size_x}"
+      base_size_x="${base_size_x}"
       dir = "R"
       reflect = "1"
       mass="${wheel_mass}"
@@ -81,7 +81,7 @@
       absolute_center_height="${wheel_radius}"
     />
     <xacro:vss_wheel_macro
-      base_size_x="${size_x}"
+      base_size_x="${base_size_x}"
       dir = "L"
       reflect = "-1"
       mass="${wheel_mass}"
