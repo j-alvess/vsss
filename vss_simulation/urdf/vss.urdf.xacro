@@ -21,7 +21,11 @@
         </geometry>
       </collision>
 
-      <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
+      <inertial>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <mass value="${mass}"/>
+        <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
+      </inertial>
       
       <gazebo>
         <material>Gazebo/Black</material>
@@ -48,13 +52,17 @@
       </visual>
 
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 ${wheel_radius-wheel_center_height+size_z/2}" rpy="0 0 0"/>
         <geometry>
           <box size="${size_x} ${size_y} ${size_z}"/>
         </geometry>
       </collision>
 
-      <xacro:cuboid_inertia_macro mass="${mass}" width="${size_y}" length="${size_x}" height="${size_z}"/>
+      <inertial>
+        <origin xyz="0 0 ${wheel_radius-wheel_center_height+size_z/2}" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <xacro:cuboid_inertia_macro mass="${mass}" width="${size_y}" length="${size_x}" height="${size_z}"/>
+      </inertial>
       
       <gazebo>
         <material>Gazebo/Blue</material>
@@ -64,7 +72,7 @@
     </link>
 
     <xacro:vss_wheel_macro
-      base_size_x="${base_size_x}"
+      base_size_x="${size_x}"
       dir = "R"
       reflect = "1"
       mass="${wheel_mass}"
@@ -73,7 +81,7 @@
       absolute_center_height="${wheel_radius}"
     />
     <xacro:vss_wheel_macro
-      base_size_x="${base_size_x}"
+      base_size_x="${size_x}"
       dir = "L"
       reflect = "-1"
       mass="${wheel_mass}"
