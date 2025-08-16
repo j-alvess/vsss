@@ -3,6 +3,8 @@
 
   <xacro:include filename="$(find vss_simulation)/urdf/common_properties.urdf.xacro" />
   <xacro:include filename="$(find vss_simulation)/urdf/inertias.urdf.xacro" />
+  <xacro:include filename="$(find vss_simulation)/urdf/roda_boba.urdf.xacro" />
+
 
   <xacro:macro name="vss_wheel_macro" params="base_size_x dir reflect mass width radius absolute_center_height">
   <link name="wheel${dir}_link">
@@ -89,5 +91,22 @@
       radius="${wheel_radius}"
       absolute_center_height="${wheel_radius}"
     />
+
+    <xacro:roda_boba_macro 
+    prefix="front" 
+    parent="base_link" 
+    x_offset="0" 
+    y_offset="${pos_y_roda_boba}" 
+    z_offset="${pos_z_roda_boba}"
+    />
+
+    <xacro:roda_boba_macro 
+    prefix="rear" 
+    parent="base_link" 
+    x_offset="0" 
+    y_offset="${-pos_y_roda_boba}" 
+    z_offset="${pos_z_roda_boba}"
+    />
+    
   </xacro:macro>
 </robot>
