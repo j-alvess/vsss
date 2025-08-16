@@ -3,13 +3,19 @@
 
   <!-- 1) Definição dos parâmetros via property -->
   <xacro:property name="base_mass"    value="2.0"/>
-  <xacro:property name="base_size_x"  value="0.055"/> <!-- rodas tem eixo paralelo ao X -->
-  <xacro:property name="base_size_y"  value="0.075"/>
-  <xacro:property name="base_size_z"  value="0.065"/> <!-- a vertical é o eixo Y -->
+  <xacro:property name="base_size_x"  value="0.055"/> <!-- rodas estão paralelas ao eixo X -->
+  <xacro:property name="base_size_y"  value="0.075"/> 
+  <xacro:property name="base_size_z"  value="0.065"/> <!-- a vertical é o eixo Z -->
   <xacro:property name="wheel_mass"  value="0.1"/>
   <xacro:property name="wheel_width"  value="0.01"/>
   <xacro:property name="wheel_radius" value="0.02"/>
   <xacro:property name="wheel_center_height"  value="0.01"/>  <!-- value="0" é a parte de baixo da base -->
+  
+  <!-- Roda boba-->
+  <xacro:property name="raio_roda_boba" value="0.01" />
+  <xacro:property name="massa_roda_boba" value="0.05" />
+  <xacro:property name="pos_y_roda_boba" value="${base_size_y/2 - raio_roda_boba - 0.005}" />
+  <xacro:property name="pos_z_roda_boba" value="${raio_roda_boba}" />
 
   <!-- 3) Inclui definição da sua macro de montagem -->
   <xacro:include filename="$(find vss_simulation)/urdf/vss.urdf.xacro"/>
