@@ -55,11 +55,17 @@ def generate_launch_description():
 
      # Criacao dos robos
      for name, pos in robots:
+          robot_description = Command([
+               'xacro ',
+               robot_path,
+               f' prefix:={name}_'
+          ])
+
           robot_state_publisher = Node(
                package='robot_state_publisher', 
                executable='robot_state_publisher',
                namespace=name, 
-               parameters=[{'robot_description': Command(['xacro ', robot_path])}])
+               parameters=[{'robot_description': robot_description}])
           
           spawn_entity = Node(
                package='gazebo_ros', 
@@ -93,5 +99,5 @@ def generate_launch_description():
           spawn_entity_camera
      ]))
 
-     
+
      return ld

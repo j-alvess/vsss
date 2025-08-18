@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot name="vss_robot_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- 0) Obtençao de parâmetros especificos via args-->
+  <xacro:arg name="prefix" default="vss_"/>
 
   <!-- 1) Definição dos parâmetros via property -->
   <xacro:property name="base_mass"    value="2.0"/>
@@ -22,6 +24,7 @@
 
   <!-- 4) Invoca a macro com os valores acima -->
   <xacro:vss_base_macro
+    prefix="$(arg prefix)"
     mass="${base_mass}"
     size_x="${base_size_x}"
     size_y="${base_size_y}"

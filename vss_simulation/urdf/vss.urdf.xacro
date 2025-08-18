@@ -4,47 +4,10 @@
   <xacro:include filename="$(find vss_simulation)/urdf/common_properties.urdf.xacro" />
   <xacro:include filename="$(find vss_simulation)/urdf/inertias.urdf.xacro" />
   <xacro:include filename="$(find vss_simulation)/urdf/roda_boba.urdf.xacro" />
+  <xacro:include filename="$(find vss_simulation)/urdf/wheel.urdf.xacro"/>
 
-
-  <xacro:macro name="vss_wheel_macro" params="base_size_x dir reflect mass width radius absolute_center_height">
-  <link name="wheel${dir}_link">
-      <visual>
-        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
-        <geometry>
-          <cylinder radius="${radius}" length="${width}"/>
-        </geometry>
-        <material name="black"/>
-      </visual>
-      
-      <collision>
-        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
-        <geometry>
-          <cylinder radius="${radius}" length="${width}"/>
-        </geometry>
-      </collision>
-
-      <inertial>
-        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
-        <mass value="${mass}"/>
-        <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
-      </inertial>
-      
-      <gazebo>
-        <material>Gazebo/Black</material>
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-      </gazebo>
-    </link>
-     <joint name="base_to_wheel${dir}" type="continuous">
-        <parent link="base_link"/>
-        <child link="wheel${dir}_link"/>
-        <axis xyz="-1 0 0"/>
-        <origin xyz="${reflect*(base_size_x/2)} 0 ${absolute_center_height}" />
-    </joint>
-  </xacro:macro>
-
-  <xacro:macro name="vss_base_macro" params="mass size_x size_y size_z wheel_mass wheel_width wheel_radius wheel_center_height">
-    <link name="base_link">
+  <xacro:macro name="vss_base_macro" params="prefix mass size_x size_y size_z wheel_mass wheel_width wheel_radius wheel_center_height">
+    <link name="${prefix}base_link">
       <visual>
         <origin xyz="0 0 ${wheel_radius-wheel_center_height+size_z/2}" rpy="0 0 0"/>
         <geometry>
@@ -74,8 +37,9 @@
     </link>
 
     <xacro:vss_wheel_macro
+      prefix="${prefix}R_"
+      parent="${prefix}base_link" 
       base_size_x="${base_size_x}"
-      dir = "R"
       reflect = "1"
       mass="${wheel_mass}"
       width="${wheel_width}"
@@ -83,8 +47,9 @@
       absolute_center_height="${wheel_radius}"
     />
     <xacro:vss_wheel_macro
+      prefix="${prefix}L_"
+      parent="${prefix}base_link" 
       base_size_x="${base_size_x}"
-      dir = "L"
       reflect = "-1"
       mass="${wheel_mass}"
       width="${wheel_width}"
@@ -93,16 +58,16 @@
     />
 
     <xacro:roda_boba_macro 
-    prefix="front" 
-    parent="base_link" 
+    prefix="${prefix}front_"
+    parent="${prefix}base_link" 
     x_offset="0" 
     y_offset="${pos_y_roda_boba}" 
     z_offset="${pos_z_roda_boba}"
     />
 
     <xacro:roda_boba_macro 
-    prefix="rear" 
-    parent="base_link" 
+    prefix="${prefix}rear_"
+    parent="${prefix}base_link" 
     x_offset="0" 
     y_offset="${-pos_y_roda_boba}" 
     z_offset="${pos_z_roda_boba}"

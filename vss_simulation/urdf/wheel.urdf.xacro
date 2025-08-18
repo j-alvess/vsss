@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="vss_wheel_macro" params="prefix parent base_size_x reflect mass width radius absolute_center_height">
+  <link name="${prefix}wheel_link">
+      <visual>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${width}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      
+      <collision>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${width}"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <origin xyz="${reflect*width/2} 0 0" rpy="0 1.57 0"/>
+        <mass value="${mass}"/>
+        <xacro:cylinder_inertia_macro mass="${mass}" radius="${radius}" length="${width}"/>
+      </inertial>
+      
+      <gazebo>
+        <material>Gazebo/Black</material>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+      </gazebo>
+    </link>
+     <joint name="${prefix}wheel_to_base_joint" type="continuous">
+        <parent link="${parent}"/>
+        <child link="${prefix}wheel_link"/>
+        <axis xyz="-1 0 0"/>
+        <origin xyz="${reflect*(base_size_x/2)} 0 ${absolute_center_height}" />
+    </joint>
+  </xacro:macro>
+</robot>
