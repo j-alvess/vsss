@@ -10,15 +10,17 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
-     robots_z = 0.1
-     robots_Y = -1.57
-
      pkg_dir = get_package_share_directory('vss_simulation')
 
      robot_path = os.path.join(pkg_dir, 'urdf', 'vss.xacro')
      camera_file = PathJoinSubstitution([pkg_dir, 'urdf', 'camera.urdf.xacro'])
 
-     robots = [
+     # Propriedades gerais dos robos
+     robots_z = 0.1
+     robots_Y = -1.57
+
+     # Propriedades especificas dos robos
+     robots = [ # ['nome', [x, y]]
           [
                'robot_team1_center',
                [0.375, 0]
@@ -44,12 +46,14 @@ def generate_launch_description():
                [-0.375, -0.4]
           ]]
 
+     # Criacao de um LaunchDescription base com a arena
      ld = LaunchDescription([IncludeLaunchDescription(
           PythonLaunchDescriptionSource([
                pkg_dir, '/launch/arena_vss.launch.py'
           ])
      )])
 
+     # Criacao dos robos
      for name, pos in robots:
           robot_state_publisher = Node(
                package='robot_state_publisher', 
@@ -68,6 +72,7 @@ def generate_launch_description():
                spawn_entity
           ]))
 
+     # Criacao da Camera
      robot_state_publisher_camera = Node(
           package='robot_state_publisher',
           executable='robot_state_publisher',
@@ -83,10 +88,10 @@ def generate_launch_description():
           arguments=['-entity', 'up_camera', '-topic', '/camera/robot_description', '-x', '0', '-y', '0', '-z', '2', '-P', '1.57'],
           output='screen'
      )
-
      ld.add_action(GroupAction([
           robot_state_publisher_camera,
           spawn_entity_camera
      ]))
 
+     
      return ld
