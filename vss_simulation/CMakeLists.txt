@@ -16,7 +16,7 @@ install(
 
 # Instala todos os diretórios de recursos para que o launch file os encontre
 install(
-  DIRECTORY launch models worlds urdf rviz
+  DIRECTORY launch models worlds urdf rviz config
   DESTINATION share/${PROJECT_NAME}
 )
 

@@ -24,27 +24,28 @@ def generate_launch_description():
           [
                'robot_team1_center',
                [0.375, 0]
-          ], 
-          [
-               'robot_team1_north',
-               [0.375, 0.4]
-          ], 
-          [
-               'robot_team1_south',
-               [0.375, -0.4]
           ],
-          [
-               'robot_team2_center',
-               [-0.375, 0]
-          ], 
-          [
-               'robot_team2_north',
-               [-0.375, 0.4]
-          ], 
-          [
-               'robot_team2_south',
-               [-0.375, -0.4]
-          ]]
+          # [
+          #      'robot_team1_north',
+          #      [0.375, 0.4]
+          # ], 
+          # [
+          #      'robot_team1_south',
+          #      [0.375, -0.4]
+          # ],
+          # [
+          #      'robot_team2_center',
+          #      [-0.375, 0]
+          # ], 
+          # [
+          #      'robot_team2_north',
+          #      [-0.375, 0.4]
+          # ], 
+          # [
+          #      'robot_team2_south',
+          #      [-0.375, -0.4]
+          # ]
+     ]
 
      # Criacao de um LaunchDescription base com a arena
      ld = LaunchDescription([IncludeLaunchDescription(
@@ -58,8 +59,9 @@ def generate_launch_description():
           robot_description = Command([
                'xacro ',
                robot_path,
-               f' prefix:={name}_'
+               f' prefix:={name}_ namespace:={name}'
           ])
+          controllers_yaml = os.path.join(pkg_dir, 'config', f'{name}_.yaml')
 
           robot_state_publisher = Node(
                package='robot_state_publisher', 
@@ -72,6 +74,14 @@ def generate_launch_description():
                executable='spawn_entity.py',
                arguments=['-entity', name, '-topic', f'/{name}/robot_description', 
                     '-x', str(pos[0]), '-y', str(pos[1]), '-z', str(robots_z), '-Y', str(robots_Y)])
+
+          controller_manager_node = Node(
+               package='controller_manager',
+               executable='ros2_control_node',
+               namespace=name,
+               parameters=[controllers_yaml],
+               output='screen')
+
 
           ld.add_action(GroupAction([
                robot_state_publisher,

@@ -1,6 +1,7 @@
-robot_team1_north/controller_manager:
-  ros__prameters:
+controller_manager:
+  ros__parameters:
     update_rate: 30
+    robot_description: robot_team1_center/robot_description
     use_sim_time: true
 
     diff_cont:
@@ -9,7 +10,7 @@ robot_team1_north/controller_manager:
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-robot_team1_north/diff_cont:
+diff_cont:
   ros__parameters:
 
     publish_rate: 50.0

@@ -2,6 +2,7 @@
 <robot name="vss_robot_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- 0) Obtençao de parâmetros especificos via args-->
   <xacro:arg name="prefix" default="vss_"/>
+  <xacro:arg name="namespace" default="vss"/>
 
   <!-- 1) Definição dos parâmetros via property -->
   <xacro:property name="base_mass"    value="2.0"/>
@@ -21,6 +22,7 @@
 
   <!-- 3) Inclui definição da sua macro de montagem -->
   <xacro:include filename="$(find vss_simulation)/urdf/vss.urdf.xacro"/>
+  <xacro:include filename="$(find vss_simulation)/urdf/ros2_control.xacro"/>
 
   <!-- 4) Invoca a macro com os valores acima -->
   <xacro:vss_base_macro
@@ -34,5 +36,10 @@
     wheel_radius="${wheel_radius}"
     wheel_center_height="${wheel_center_height}"
   />
+  <xacro:vss_controller_macro
+    prefix="$(arg prefix)"
+    namespace="$(arg namespace)"
+  />
+
 
 </robot>
