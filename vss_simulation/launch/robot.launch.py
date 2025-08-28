@@ -82,6 +82,12 @@ def generate_launch_description():
                parameters=[controllers_yaml],
                output='screen')
 
+          controller = Node(
+               package='controller_manager',
+               executable='spawner',
+               arguments=['diff_control', '--controller-manager', f'/{name}/controller_manager'],
+               output='screen')
+
 
           ld.add_action(GroupAction([
                robot_state_publisher,
