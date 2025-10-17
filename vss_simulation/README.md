@@ -17,9 +17,11 @@ ros2 launch vss_simulation rviz.launch.py
 <pre>
 ros2 launch vss_simulation robot.launch.py
 </pre>
-<p> To spawn controller: 
+
+<h3> Debug </h3>
+<p> To spawn controller through terminal: 
 <pre>
-ros2 launch vss_simulation robot.launch.py
+ros2 run controller_manager spawner -c /robot_team1_center/controller_manager diff_cont
 </pre>
 <p> To use controller: 
 <pre>

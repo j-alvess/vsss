@@ -25,11 +25,7 @@
 
         <gazebo>
             <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-                <ros>
-                    <namespace>/${namespace}</namespace>
-                </ros>
-                <parameters>$(find vss_simulation)/config/${prefix}.yaml</parameters>
-                <controller_manager_name>${namespace}/controller_manager</controller_manager_name>
+                <parameters>$(find vss_simulation)/config/robot_controller.yaml</parameters>
             </plugin>
         </gazebo>
     </xacro:macro>

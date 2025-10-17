@@ -1,9 +1,8 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.actions import GroupAction
+from launch.actions import IncludeLaunchDescription, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import Node
+from launch_ros.actions import Node, PushRosNamespace
 from launch.substitutions import Command, PathJoinSubstitution
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.parameter_descriptions import ParameterValue
@@ -25,10 +24,10 @@ def generate_launch_description():
                'robot_team1_center',
                [0.375, 0]
           ],
-          # [
-          #      'robot_team1_north',
-          #      [0.375, 0.4]
-          # ], 
+          [
+               'robot_team1_north',
+               [0.375, 0.4]
+          ], 
           # [
           #      'robot_team1_south',
           #      [0.375, -0.4]
@@ -61,37 +60,33 @@ def generate_launch_description():
                robot_path,
                f' prefix:={name}_ namespace:={name}'
           ])
-          controllers_yaml = os.path.join(pkg_dir, 'config', f'{name}_.yaml')
 
           robot_state_publisher = Node(
                package='robot_state_publisher', 
                executable='robot_state_publisher',
-               namespace=name, 
-               parameters=[{'robot_description': robot_description}])
+               name='robot_state_publisher',
+               output='screen',
+               parameters=[{'robot_description': robot_description, 'frame_prefix': f'{name}_tf'}])
           
           spawn_entity = Node(
                package='gazebo_ros', 
                executable='spawn_entity.py',
-               arguments=['-entity', name, '-topic', f'/{name}/robot_description', 
+               name=f'spawn_{name}',
+               output='screen',
+               arguments=['-entity', name, '-robot_namespace', name,'-topic', 'robot_description', 
                     '-x', str(pos[0]), '-y', str(pos[1]), '-z', str(robots_z), '-Y', str(robots_Y)])
 
-          controller_manager_node = Node(
-               package='controller_manager',
-               executable='ros2_control_node',
-               namespace=name,
-               parameters=[controllers_yaml],
-               output='screen')
-
-          controller = Node(
-               package='controller_manager',
-               executable='spawner',
-               arguments=['diff_control', '--controller-manager', f'/{name}/controller_manager'],
-               output='screen')
-
+          # controller = Node(
+          #      package='controller_manager',
+          #      executable='spawner',
+          #      namespace=name, 
+          #      arguments=['diff_cont', '-c', f'/{name}/controller_manager'],
+          #      output='screen')
 
           ld.add_action(GroupAction([
+               PushRosNamespace(name),
                robot_state_publisher,
-               spawn_entity
+               spawn_entity,
           ]))
 
      # Criacao da Camera
